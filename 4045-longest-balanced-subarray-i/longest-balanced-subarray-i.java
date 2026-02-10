@@ -1,7 +1,7 @@
 class Solution {
     public int longestBalanced(int[] nums) {
         int n = nums.length;
-       int maxLen = 0;
+       int maxlen = 0;
 
         for(int i = 0; i < n; i++) {
             HashSet<Integer> seteven = new HashSet<>();
@@ -16,10 +16,10 @@ class Solution {
                 }
 
                 if(seteven.size() == setodd.size()) {
-                    maxLen = Math.max(maxLen, j - i + 1);
+                    maxlen = Math.max(maxlen, j - i + 1);
                 }
             }
         }
-        return maxLen;
+        return maxlen;
     }
 }
