@@ -1,0 +1,15 @@
+class Solution {
+    public int mirrorDistance(int n) {
+        int num = n;
+        int reversed = reverse(num);
+        return Math.abs(n-reversed);
+    }
+    int reverse(int num){
+        int rev = 0;
+    while(num>0){
+            rev = rev * 10 + (num % 10) ;
+            num = num/10;
+        }
+        return rev;
+    }
+}
