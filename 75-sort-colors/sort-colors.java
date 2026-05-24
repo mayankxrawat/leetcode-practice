@@ -3,23 +3,21 @@ class Solution {
        int low =0;
        int mid =0;
        int high = nums.length-1;
-       while(high>=mid){
-            if(nums[mid]==0){
-                int temp = nums[low];
-                nums[low]= nums[mid];
-                nums[mid]=temp;
-                low++;
-                mid++;
-            }else if(nums[mid]==1){
-                mid++;
-            }else{
-                int temp = nums[high];
-                nums[high]=nums[mid];
-                nums[mid]=temp;
-                
-                high--;
-            }
+       while(mid<=high){
+        if(nums[mid]==1){
+            mid++;
+        }else if ( nums[mid]==0){
+            int temp = nums[mid];
+            nums[mid]=nums[low];
+            nums[low]=temp;
+            mid++;
+            low++;
+        }else{
+            int temp = nums[high] ;
+            nums[high]=nums[mid];
+            nums[mid]=temp;
+            high--;
+        }
        }
-       
     }
 }
