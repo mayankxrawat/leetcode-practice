@@ -34,6 +34,8 @@ class Solution {
          return noOfB >= m;
     }
     public int minDays(int[] bloomday, int m, int k) {
+        if (m*k > bloomday.length)
+    return -1;
         int low = minimum (bloomday) ;
         int high = maximum (bloomday);
         int ans =-1;
