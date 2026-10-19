@@ -4,17 +4,12 @@ class Solution {
        int n = nums.length;
        int[] temp = new int [n];
        for(int i=0 ; i< n ; i++){
-        if(nums[i]!=0 ){
-            temp[j]= nums[i];
+        if(nums[i] != 0){
+            int t = nums[j];
+            nums[j] = nums[i];
+            nums[i]= t ;
             j++;
         }
-       }
-       for(int i =0 ; i < j ;i++){
-        nums[i]= temp[i];
-       }
-
-       for(int i = j; i<n ;i++){
-        nums[i]= 0;
        }
 
     }
