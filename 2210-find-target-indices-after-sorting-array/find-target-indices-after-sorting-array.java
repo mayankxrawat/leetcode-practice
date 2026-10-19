@@ -1,40 +1,12 @@
 class Solution {
-    private int lowerBound(int[] nums , int target){
-        int low = 0 ;
-        int high = nums.length;
-        while( low < high){
-            int mid = low + (high - low )/2;
-            if(nums[mid]>=target){
-                high= mid;
-            }else{
-                low= mid+1;
-            }
-        }
-        return low;
-    }
-    private int upperBound(int[] nums , int target){
-        int low = 0 ;
-        int high = nums.length;
-        while( low < high){
-            int mid = low + (high - low )/2;
-            if(nums[mid]>target){
-                high= mid;
-            }else{
-                low= mid+1;
-            }
-        }
-        return low;
-    }
     public List<Integer> targetIndices(int[] nums, int target) {
+        List<Integer> list = new ArrayList<>();
         Arrays.sort(nums);
-        int lb = lowerBound(nums, target);
-        int ub = upperBound(nums, target);
-
-        List<Integer> ans = new ArrayList<>();
-
-        for(int i = lb;i<ub;i++){
-            ans.add(i);
+        for(int i=0; i<nums.length;i++){
+            if(nums[i]==target){
+                list.add(i);
+            }
         }
-        return ans;
+        return list;
     }
 }
