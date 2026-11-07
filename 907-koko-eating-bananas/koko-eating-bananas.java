@@ -1,34 +1,26 @@
 class Solution {
-
-    private long calculatehours(int piles[] , int speed){
-       
-        long hours =0;
-        for(int pile:piles){
-
-            hours +=(pile+speed-1) / speed;
-        }
-        return hours;
-    }
     public int minEatingSpeed(int[] piles, int h) {
-        int low = 1;
-        int high = 0;
+         int low = 1;                          // minimum possible speed
+        int high = 0;                         // will become max(piles)
+        for (int p : piles) high = Math.max(high, p);
 
-        for(int pile : piles){
-            high = Math.max(high,pile);
-        }
-
-        int ans = high ;
-
-        while(low<=high){
-            int mid = (low+high)/2;
-            long hours = calculatehours(piles, mid);
-            if(hours <=h ){
-                ans=mid;
-                high=mid-1;
-            }else{
-                low = mid+1;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (canFinish(piles, mid, h)) {
+                high = mid;                   // mid works → try slower
+            } else {
+                low = mid + 1;                // mid too slow → go faster
             }
         }
-        return ans;
+        return low;                           // smallest speed that works
+    }
+
+    private boolean canFinish(int[] piles, int k, int h) {
+        long hours = 0;
+        for (int p : piles) {
+            hours += (p + k - 1) / k;         // ceil(p / k)
+            if (hours > h) return false;      // early exit
+        }
+        return hours <= h;
     }
 }
