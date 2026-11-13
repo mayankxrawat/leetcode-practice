@@ -1,39 +1,35 @@
 class Solution {
-    int capacity( int arr[] , int cap){
-        int days =1;
-        int load =0;
-
-        
-        for (int weight : arr) {
-            if (load + weight <= cap) {
-                load += weight;
-            } 
-            else {
-                days++;
-                load = weight;
-            }
-
-        }
-        return days;
-    }
     public int shipWithinDays(int[] weights, int days) {
-        int max = Integer.MIN_VALUE;
-        int maxi =0;
-        for(int i=0;i<weights.length;i++){
-            maxi +=weights[i];
-            if(weights[i]>max){
-                max=weights[i];
+        int low =0;
+        int high = 0 ; 
+        for(int w: weights){
+            low= Math.max(w,low);
+            high +=w;
+        }
+        while(low<high){
+            int mid = low+(high-low)/2;
+            if(canShip (weights , mid , days)){
+                high=mid;
+            }else{
+                low = mid+1;
             }
         }
-        int low = max ;
-        int high = maxi ;
-        while(low<= high ){
-            int mid = (low + high )/2;
-            int requiredDays = capacity(weights , mid);
-            if(requiredDays<=days){
-                high=mid-1;
-            }else low = mid+1;
-        }
-        return low ;
+        return low;
+    }
+    private boolean canShip(int[] weights , int capacity , int days){
+        int dayUsed = 1;
+        int currLoad = 0;
+        for(int w:weights){
+              if( currLoad + w > capacity){
+                dayUsed++;
+                currLoad = 0 ;
+                }
+                if(dayUsed>days){
+                    return false;
+                }else{
+                    currLoad += w;
+                }
+            }
+      return true;
     }
 }
